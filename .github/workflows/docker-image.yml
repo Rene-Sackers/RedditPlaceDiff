@@ -21,7 +21,7 @@ jobs:
         git push origin v$VERSION
             
     - name: Docker login
-      run: docker login ghcr.io -u Rene-Sackers -p ${{ secrets.GH_SECRET }}
+      run: docker login ghcr.io -u Rene-Sackers -p ${{ secrets.GITHUB_TOKEN }}
       
     - name: Build the Docker image
       run: docker build . --file Dockerfile -t ghcr.io/rene-sackers/RedditPlaceTemplateGen:$VERSION -t ghcr.io/rene-sackers/RedditPlaceTemplateGen:latest
