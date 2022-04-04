@@ -1,0 +1,30 @@
+name: Docker Image CI
+
+on: push
+
+jobs:
+  build:
+    if: github.ref == 'refs/heads/release'
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    
+    - name: Set version
+      run: |
+        echo "VERSION=$(date +%Y.%-m.%-d.%-H%M%S)" >> $GITHUB_ENV
+        echo "Version: $VERSION"
+    
+    - name: Tag commit
+      run: |
+        git tag v$VERSION ${{ github.sha }}
+        git push origin v$VERSION
+            
+    - name: Docker login
+      run: docker login ghcr.io -u Rene-Sackers -p ${{ secrets.GH_SECRET }}
+      
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile -t ghcr.io/rene-sackers/RedditPlaceTemplateGen:$VERSION -t ghcr.io/rene-sackers/RedditPlaceTemplateGen:latest
+      
+    - name: Push docker image
+      run: docker push --all-tags ghcr.io/rene-sackers/RedditPlaceTemplateGen
