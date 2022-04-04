@@ -75,7 +75,7 @@ public static class TemplateGenPlaceNl
 	{
 		Console.WriteLine($"Downloading map: {mapUrl}");
 		var mapRequest = await HttpClient.GetAsync(mapUrl);
-		var imageStream = await mapRequest.Content.ReadAsStreamAsync();
+		await using var imageStream = await mapRequest.Content.ReadAsStreamAsync();
 
 		Console.WriteLine("Generating template");
 		return await TemplateGen.GenerateTemplateAsync(imageStream);
@@ -99,7 +99,7 @@ public static class TemplateGenPlaceNl
 
 		try
 		{
-			var templateStream = await GetTemplateImageAsync(mapUrl);
+			await using var templateStream = await GetTemplateImageAsync(mapUrl);
 			_templateCacheInfo = new()
 			{
 				Data = templateStream.ToArray(),
