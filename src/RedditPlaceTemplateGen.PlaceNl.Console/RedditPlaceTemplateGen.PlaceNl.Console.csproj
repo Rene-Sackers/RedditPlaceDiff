@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net6.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <RootNamespace>RedditPlaceTemplateGen.Console</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+      <PackageReference Include="SixLabors.ImageSharp" Version="2.1.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RedditPlaceTemplateGen.PlaceNl\RedditPlaceTemplateGen.PlaceNl.csproj" />
+      <ProjectReference Include="..\RedditPlaceTemplateGen\RedditPlaceTemplateGen.csproj" />
+    </ItemGroup>
+
+</Project>

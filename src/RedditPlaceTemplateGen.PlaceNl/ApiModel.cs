@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace RedditPlaceDiff;
+namespace RedditPlaceTemplateGen;
 
 public class MapHistory
 {
